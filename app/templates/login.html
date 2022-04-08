@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
 </head>
 
 <body>
@@ -62,16 +62,16 @@
                                     <label for="loginInput"
                                         class="col-sm-3 control-label fontLight textAlignLeft">Email</label>
                                     <div class="col-sm-9">
-                                        <input name="email" type="email" class="form-control borderGray textColorDefaut"
-                                            id="loginInput">
+                                        <input name="username" id = "username" type="text" class="form-control borderGray textColorDefaut"
+                                           >
                                     </div>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputPSWD" class="col-sm-3 control-label fontLight textAlignLeft">Mật
                                         khẩu</label>
                                     <div class="col-sm-9">
-                                        <input name="passe" type="password"
-                                            class="form-control borderGray textColorDefaut" id="inputPSWD">
+                                        <input name="password" type="password"
+                                            class="form-control borderGray textColorDefaut" id="password">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -86,9 +86,9 @@
                                 </div>
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button name="connexion" type="button" class="btnSendText">Đăng nhập</button>
+                                        <button name="connexion" type="submit" value="SIGNIN" class="btnSendText">Đăng nhập</button>
                                         &nbsp; <span>&bull;</span> &nbsp;
-                                        <a style="padding-top:10px; padding-bottom:10px;" href="/component/register.html"
+                                        <a style="padding-top:10px; padding-bottom:10px;" href="/register"
                                             class="formatResoomer" title="Tạo một tài khoản">Tạo một tài khoản</a>
                                     </div>
                                 </div>

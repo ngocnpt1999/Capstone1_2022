@@ -5,8 +5,8 @@ from transformers import AutoTokenizer,EncoderDecoderModel,AutoModel,AutoModelFo
 
 
 def text(input_text):
-    tokenizer = AutoTokenizer.from_pretrained("./content/checkpoint-52000")
-    model = AutoModelForSeq2SeqLM.from_pretrained("./content/checkpoint-52000")
+    tokenizer = AutoTokenizer.from_pretrained("./content/checkpoint-65500")
+    model = AutoModelForSeq2SeqLM.from_pretrained("./content/checkpoint-65500")
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model.to(device)
     with torch.no_grad():

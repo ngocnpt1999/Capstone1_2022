@@ -8,9 +8,9 @@
     <title>Document</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}">
-    <!-- <script src="/js/jQuery.js"></script>
-    <script src="/js/bootstrap.js"></script>
-    <script src="/js/index.js"></script> -->
+    <script src="../static/js/jQuery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="../static/js/index.js"></script>
 </head>
 
 <body>
@@ -60,10 +60,10 @@
                 <!-- Hero Subtitle -->
                 <!--<h5>we advice + we design + we develope</h5>-->
             </div>
-            <div class="row">
-                <div class="col-sm-6 col-xs-12 no-padding">
-                    <div class="about-us-left no-padding">
-                        <form id="resoomerForm" class="resoomerForm" method="POST" action="#">
+            <form id="resoomerForm" class="resoomerForm" method="POST" action="{{ url_for('homepage') }}">
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12 no-padding">
+                        <div class="about-us-left no-padding">
                             <fieldset class="resoomerFormConteneur">
                                 <div class="conteneurAPI">
                                     <div class="OptionsWebView">
@@ -73,12 +73,11 @@
                                                     <a onClick="setExemple();" href="#" title="Ví dụ văn bản"
                                                         class="formatResoomer">Ví dụ văn bản</a>
                                                     &nbsp;
-                                                    <span class="DisplayForMobile"><br /></span>
                                                     <a onClick="clearTextarea();" href="#" title="Xóa văn bản"
                                                         class="formatResoomer">Xóa văn bản</a>
                                                 </li>
                                                 <li class="li_2">
-                                                    <input type="button" id="btnSendText_V2"
+                                                    <input type="submit" id="btnSendText_V2"
                                                         class="btnSendText floatRight" value="Chuyển đổi">
                                                 </li>
                                             </ul>
@@ -91,75 +90,42 @@
                                             <span id="noticeSizeText" style="font-size:12px;">&nbsp;</span>
                                         </p>
                                     </div>
-                                    <div class="OptionsMobileView">
-                                        <div class="topConteneurAPI">
-                                            <p>
-                                                <a onClick="setExemple();" href="#" title="Ví dụ văn bản"
-                                                    class="formatResoomer" style="float:left;">Ví dụ văn bản</a>
-                                                <a onClick="clearTextarea();" href="#" title="Xóa văn bản"
-                                                    class="formatResoomer" style="float:right; margin-right:5px;">Xóa
-                                                    văn bản</a>
-                                            </p>
-                                            <p style="clear:both;">&nbsp;</p>
-                                        </div>
-                                    </div>
-                                    <form action="" method="post">
-                                        <textarea id="contentText" name="contentText" placeholder="Sao chép và dán văn bản hoặc URL bài viết của bạn ở đây">{{contentText}}</textarea>
-                                        <div>
-                                            <input type="submit"  class="btnSendText" value="Submit" >
-                                        </div>
-                                        {% if result %}
-                                            <p>{{result}}</p>
-                                        {% endif %}
-
-                                        <div class="OptionsMobileView">
-                                            <!-- <p>
-                                                <input type="submit" id="btnSendText_V2_Mobile" class="btnSendText"
-                                                    value="Chuyển đổi" style="width:97%;">
-                                            </p>
-                                            <p style="text-align:center;">
-                                                <a href="#"><span><u>Nhập khẩu tài
-                                                            liệu</u></span></a>
-                                            </p> -->
-
-                                        </div>
-                                    </form>
+                                    <textarea id="contentText" name="contentText"
+                                        placeholder="Sao chép và dán văn bản hoặc URL bài viết của bạn ở đây"
+                                        onKeyUp="textAreaAdjust(this);"
+                                        style="overflow:hidden;">{{contentText}}</textarea>
                                 </div>
-                                <!-- <input type="hidden" name="langSite" value="vi" />
-                                <input type="hidden" name="sampleText" id="sampleText" value="" />
-                                <input type="hidden" name="adBlockerDetect" id="adBlockerDetect" value="0" />
-                                <input type="hidden" name="enableProcess" id="enableProcess" value="0" />
-                                <input type="hidden" name="issetPost" id="issetPost" value="0" />
-                                <input type="hidden" name="keyForm" id="keyForm"
-                                    value="1647970713-391279052-829313901-19619091" /> -->
                             </fieldset>
-                        </form>
-                        <a href="#rightResoomer" class="page-scroll DisplayNone" id="goToResumer">&nbsp;</a>
+                            <a href="#rightResoomer" class="page-scroll DisplayNone" id="goToResumer">&nbsp;</a>
+                        </div>
                     </div>
-                </div>
-                <div class="col-sm-6 col-xs-12 no-padding">
-                    <div class="about-us-right no-padding about-us-right-resoomer">
-                        <div id="rightResoomer">
-                            <div id="loaderContent_V2" class="DisplayNone">
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="about-us-right-resoomer">
+                            <div id="rightResoomer">
+                                <div id="loaderContent_V2" class="DisplayNone">
+                                    <p>&nbsp;</p>
+                                    <span id="conteneurBar" class="initBar">
+                                        <span id="barProcess">&nbsp;</span>
+                                    </span>
+                                    <p id="processTitle" class="processTitle">Initialisation...</p>
+                                </div>
+                                <div class="DisplayNone">
+                                    <div id="processing_part_2"></div>
+                                    <div id="processing_part_3"></div>
+                                    <div id="processing_part_4"></div>
+                                    <div id="processing_part_5"></div>
+                                </div>
+                                <div id="returnResoomer" style="padding: 15px;">
+                                    {% if result %}
+                                    <p>{{result}}</p>
+                                    {% endif %}
+                                </div>
                                 <p>&nbsp;</p>
-                                <span id="conteneurBar" class="initBar">
-                                    <span id="barProcess">&nbsp;</span>
-                                </span>
-                                <p id="processTitle" class="processTitle">Initialisation...</p>
                             </div>
-                            <div class="DisplayNone">
-                                <div id="processing_part_2"></div>
-                                <div id="processing_part_3"></div>
-                                <div id="processing_part_4"></div>
-                                <div id="processing_part_5"></div>
-                            </div>
-                            <div id="returnResoomer">
-                            </div>
-                            <p>&nbsp;</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </form>
         </div>
     </section>
     <!-- End Of Hero Section -->
@@ -448,7 +414,7 @@
             });
         });
     </script>
-    
+
     <style type="text/css">
         .accordion-toggle {
             cursor: pointer;

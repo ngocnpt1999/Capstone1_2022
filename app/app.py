@@ -17,8 +17,8 @@ from transformers import AutoTokenizer,EncoderDecoderModel,AutoModelForSeq2SeqLM
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.db'
 db = SQLAlchemy(app)
-tokenizer = AutoTokenizer.from_pretrained("./content/checkpoint-65500")
-model = AutoModelForSeq2SeqLM.from_pretrained("./content/checkpoint-65500")
+tokenizer = AutoTokenizer.from_pretrained("./model/Summarize/content/checkpoint-65500")
+model = AutoModelForSeq2SeqLM.from_pretrained("./model/Summarize/content/checkpoint-65500")
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 model.to(device)
 
@@ -85,7 +85,6 @@ def login():
 def profile():
     if not g.user:
         return redirect(url_for('login'))
-
     return render_template('profile.html')
 
 @app.route('/register', methods = ['POST', 'GET'])
@@ -109,6 +108,9 @@ def register():
             error = "User account exist!"
     return render_template('register.html',error = error)
 
+@app.route('/blog')
+def blog():
+    return render_template('blog.html')
 
 if __name__=="__main__":
     app.run(host= "localhost",port = "5000")

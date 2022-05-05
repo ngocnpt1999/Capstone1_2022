@@ -1,8 +1,8 @@
 from transformers import AutoTokenizer, T5ForConditionalGeneration
 import re
 
-model = T5ForConditionalGeneration.from_pretrained(r'C:\Users\DEV_DN_LOCTV\Desktop\Demo_ThucTap\SC_checking\content\checkpoint-18500')
-tokenizer = AutoTokenizer.from_pretrained(r'C:\Users\DEV_DN_LOCTV\Desktop\Demo_ThucTap\SC_checking\content\checkpoint-18500')
+model = T5ForConditionalGeneration.from_pretrained(r'.\model\SC_checking\content\checkpoint-18500')
+tokenizer = AutoTokenizer.from_pretrained(r'.\model\SC_checking\content\checkpoint-18500')
 global SPECIAL
 SPECIAL =[]
 def get_correct(sentences):

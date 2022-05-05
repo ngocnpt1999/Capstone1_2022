@@ -1,3 +1,4 @@
+import time
 from unicodedata import name
 from django.shortcuts import render
 from flask import (
@@ -13,6 +14,8 @@ from flask_sqlalchemy import SQLAlchemy
 import torch
 from vncorenlp import VnCoreNLP
 from transformers import AutoTokenizer,EncoderDecoderModel,AutoModelForSeq2SeqLM
+from Summarize import get_correct_sum
+from format import get_correct
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///mydb.db'
@@ -60,8 +63,14 @@ def homepage():
         return render_template('index.html')
     if request.method == 'POST':
         inputtext = request.form['contentText']
-        result = text(str(inputtext))
-        return render_template('index.html',contentText = inputtext, result = result)
+        x = time.time()
+        if request.form['action'] == 'Chuyển đổi':
+            result = get_correct_sum(inputtext,60)
+        else:
+            result = get_correct(inputtext)
+        y = time.time()
+        predictionTime = f"Time to prediction: {y-x} seconds"
+        return render_template('index.html',contentText = inputtext, result = result, predictionTime = predictionTime)
     
         
 

@@ -79,7 +79,10 @@
                                                 </li>
                                                 <li class="li_2">
                                                     <input type="submit" id="btnSendText_V2"
-                                                        class="btnSendText floatRight" value="Chuyển đổi">
+                                                        class="btnSendText floatRight" name="action" value="Chuyển đổi">
+                                                    <div class="floatRight" style="margin: 2.5px;"></div>
+                                                    <input type="submit" id="btnSendText_V2"
+                                                        class="btnSendText floatRight" name="action" value="Sửa lỗi">
                                                 </li>
                                             </ul>
                                         </div>
@@ -117,6 +120,10 @@
                                     <div id="processing_part_5"></div>
                                 </div>
                                 <div id="returnResoomer" style="padding: 15px;">
+                                    {% if predictionTime %}
+                                    <p>{{predictionTime}}</p>
+                                    {% endif %}
+                                    <br>
                                     {% if result %}
                                     <p>{{result}}</p>
                                     {% endif %}
